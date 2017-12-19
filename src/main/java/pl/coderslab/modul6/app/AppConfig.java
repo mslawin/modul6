@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -15,10 +16,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import pl.coderslab.modul6.converter.AuthorConverter;
+import pl.coderslab.modul6.converter.PublisherConverter;
+
 @Configuration
-@ComponentScan(basePackages = { "pl.coderslab.modul6.bean",
-		"pl.coderslab.modul6.controller",
-		"pl.coderslab.modul6.entity"})
+@ComponentScan(basePackages = { "pl.coderslab.modul6.bean", "pl.coderslab.modul6.controller",
+		"pl.coderslab.modul6.entity" })
 @EnableWebMvc
 @EnableTransactionManagement
 public class AppConfig extends WebMvcConfigurerAdapter {
@@ -47,5 +50,21 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
 		JpaTransactionManager tm = new JpaTransactionManager(emf);
 		return tm;
+	}
+
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addConverter(authorConverter());
+		registry.addConverter(publisherConverter());
+	}
+
+	@Bean
+	public AuthorConverter authorConverter() {
+		return new AuthorConverter();
+	}
+	
+	@Bean
+	public PublisherConverter publisherConverter() {
+		return new PublisherConverter();
 	}
 }

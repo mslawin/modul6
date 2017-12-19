@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.coderslab.modul6.entity.Book;
-import pl.coderslab.modul6.entity.BookDAO;
 import pl.coderslab.modul6.entity.Publisher;
 import pl.coderslab.modul6.entity.PublisherDAO;
 
@@ -22,6 +21,21 @@ public class PublisherController {
 	public String add() {
 		Publisher p = new Publisher("Biblioteka Narodowa");
 		pd.save(p);
-		return "Dodano publishera id="+p.getId();
+		Publisher p2 = new Publisher("PWN");
+		pd.save(p2);
+		Publisher p3 = new Publisher("Helion");
+		pd.save(p3);
+		return "Dodano publisherow";
+	}
+	
+	@GetMapping("/getbooks")
+	@ResponseBody
+	public String getbooks() {
+		Publisher p = this.pd.getById(1);
+		String html = "";
+		for(Book b : p.getBooks()) {
+			html += b.getTitle() + "\r\n";
+		}
+		return html;
 	}
 }

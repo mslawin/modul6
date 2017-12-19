@@ -20,10 +20,10 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String title;
-	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	private List<Author> authors = new ArrayList<>();
 	private long rating;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade= {CascadeType.ALL})
 	private Publisher publisher;
 	private String description;
 
@@ -58,7 +58,7 @@ public class Book {
 		return authors;
 	}
 
-	public void setAuthor(List<Author> authors) {
+	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
 	}
 
@@ -85,4 +85,12 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + ", authors=" + authors + ", rating=" + rating + ", publisher="
+				+ publisher + ", description=" + description + "]";
+	}
+	
+	
 }

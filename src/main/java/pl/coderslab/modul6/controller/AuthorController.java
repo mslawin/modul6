@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.coderslab.modul6.entity.Author;
 import pl.coderslab.modul6.entity.AuthorDAO;
-import pl.coderslab.modul6.entity.Book;
-import pl.coderslab.modul6.entity.BookDAO;
-import pl.coderslab.modul6.entity.Publisher;
-import pl.coderslab.modul6.entity.PublisherDAO;
 
 @Controller
 @RequestMapping("/author")

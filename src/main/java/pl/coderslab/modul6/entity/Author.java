@@ -48,4 +48,15 @@ public class Author {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
+	}
+
+	@Override
+	public String toString() {
+		return "Author [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+	
+	
 }

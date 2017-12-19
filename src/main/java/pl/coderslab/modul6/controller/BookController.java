@@ -1,10 +1,16 @@
 package pl.coderslab.modul6.controller;
 
-import java.util.Arrays;
+import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -120,5 +126,51 @@ public class BookController {
 			html += a.getFirstName() + " " + a.getLastName() + "\r\n";
 		}
 		return html;
+	}
+	
+	@GetMapping("/list")
+	public String list() {
+		return "book/list";
+	}
+	
+	@GetMapping("/addform")
+	public String addform(Model m) {
+		m.addAttribute("book", new Book());
+		return "book/addBook";
+	}
+
+	@PostMapping("/addform")
+	public String addformPost(@ModelAttribute Book book) {
+		this.bd.update(book);
+		return "redirect:/book/list";
+	}
+	
+	@GetMapping("{id}/edit")
+	@Transactional
+	public String edit(Model m, @PathVariable Long id) {
+		Book b = this.bd.getById(id);
+		m.addAttribute("book", b);
+		return "book/addBook";
+	}
+	
+	@PostMapping(value="{id}/edit")
+	public String editPost(@ModelAttribute Book book) {
+		this.bd.update(book);
+		return "redirect:/book/list";
+	}
+	
+	@ModelAttribute("availableAuthors")
+	public List<Author> getAuthors(){
+		return this.ad.getAll();
+	}
+	
+	@ModelAttribute("availablePublishers")
+	public List<Publisher> getPublishers(){
+		return this.pd.getAll();
+	}
+	
+	@ModelAttribute("availableBooks")
+	public List<Book> getBooks(){
+		return this.bd.getAll();
 	}
 }

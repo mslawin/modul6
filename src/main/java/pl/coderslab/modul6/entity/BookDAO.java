@@ -1,7 +1,10 @@
 package pl.coderslab.modul6.entity;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -22,5 +25,10 @@ public class BookDAO {
 	
 	public void update(Book b) {
 		this.em.merge(b);
+	}
+	
+	public List<Book> getAll() {
+		Query q = this.em.createQuery("SELECT b FROM Book b");
+		return q.getResultList();
 	}
 }
