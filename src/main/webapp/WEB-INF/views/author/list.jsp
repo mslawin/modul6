@@ -12,11 +12,11 @@
 <title>Book list</title>
 </head>
 <body>
-<p>Book list</p>
-	<c:forEach items="${availableBooks}" var="book">
-		<c:out value="${book}"/> 
-		<a href="${pageContext.request.contextPath}/book/${book.id}/del">DEL</a>
-		<a href="${pageContext.request.contextPath}/book/${book.id}/edit">Edit</a><br/>
+<p>Author list</p>
+	<c:forEach items="${availableAuthors}" var="author">
+		<c:out value="${author}"/> 
+		<a href="${pageContext.request.contextPath}/author/${author.id}/del">DEL</a>
+		<a href="${pageContext.request.contextPath}/author/${author.id}/edit">Edit</a><br />
 	</c:forEach>
 </body>
 </html>

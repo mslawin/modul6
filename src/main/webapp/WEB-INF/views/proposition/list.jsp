@@ -13,10 +13,10 @@
 </head>
 <body>
 <p>Book list</p>
-	<c:forEach items="${availableBooks}" var="book">
+	<c:forEach items="${availablePropositions}" var="book">
 		<c:out value="${book}"/> 
-		<a href="${pageContext.request.contextPath}/book/${book.id}/del">DEL</a>
-		<a href="${pageContext.request.contextPath}/book/${book.id}/edit">Edit</a><br/>
+		<a href="${pageContext.request.contextPath}/proposition/${book.id}/del">DEL</a>
+		<a href="${pageContext.request.contextPath}/proposition/${book.id}/edit">Edit</a><br/>
 	</c:forEach>
 </body>
 </html>

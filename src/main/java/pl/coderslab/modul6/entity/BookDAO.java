@@ -31,4 +31,22 @@ public class BookDAO {
 		Query q = this.em.createQuery("SELECT b FROM Book b");
 		return q.getResultList();
 	}
+	
+	public void delete(long id) {
+		em.remove(getById(id));
+	}
+
+	public List<Book> getAllPropositions() {
+		Query q = this.em.createQuery("SELECT b FROM Book b"
+				+ " where b.proposition = TRUE");
+		return q.getResultList();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

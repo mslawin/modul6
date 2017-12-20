@@ -3,10 +3,13 @@ package pl.coderslab.modul6.controller;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,7 @@ import pl.coderslab.modul6.entity.Book;
 import pl.coderslab.modul6.entity.BookDAO;
 import pl.coderslab.modul6.entity.Publisher;
 import pl.coderslab.modul6.entity.PublisherDAO;
+import pl.coderslab.modul6.validator.BookValidationGroup;
 
 @Controller
 @RequestMapping("/book")
@@ -140,8 +144,13 @@ public class BookController {
 	}
 
 	@PostMapping("/addform")
-	public String addformPost(@ModelAttribute Book book) {
-		this.bd.update(book);
+	public String addformPost(@Validated(BookValidationGroup.class) @ModelAttribute Book book, 
+			BindingResult bindingResult) {
+		book.setProposition(false);
+		if (bindingResult.hasErrors()) {
+			return "book/addBook";
+		}
+		this.bd.save(book);
 		return "redirect:/book/list";
 	}
 	
@@ -154,8 +163,18 @@ public class BookController {
 	}
 	
 	@PostMapping(value="{id}/edit")
-	public String editPost(@ModelAttribute Book book) {
+	public String editPost(@Validated(BookValidationGroup.class) @ModelAttribute Book book,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return "book/addBook";
+		}
 		this.bd.update(book);
+		return "redirect:/book/list";
+	}
+	
+	@GetMapping("{id}/del")
+	public String del(@PathVariable long id) {
+		this.bd.delete(id);
 		return "redirect:/book/list";
 	}
 	

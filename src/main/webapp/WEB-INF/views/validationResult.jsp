@@ -9,19 +9,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Book list</title>
+<title>Validation results</title>
 </head>
 <body>
-<p>Book list</p>
-	<c:forEach items="${availableBooks}" var="book">
-		<c:out value="${book}"/> 
-		<a href="${pageContext.request.contextPath}/book/${book.id}/del">DEL</a>
-		<a href="${pageContext.request.contextPath}/book/${book.id}/edit">Edit</a><br/>
+	<c:forEach items="${errors}" var="error"> 
+		${error.propertyPath} : ${error.message} <br/>
 	</c:forEach>
+	
+	
+	
+	
+	
+	
 </body>
 </html>
-
-
-
-
-

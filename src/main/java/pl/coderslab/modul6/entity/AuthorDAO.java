@@ -27,4 +27,21 @@ public class AuthorDAO {
 		Query q = this.em.createQuery("SELECT a FROM Author a");
 		return q.getResultList();
 	}
+
+	public void update(Author author) {
+		this.em.merge(author);	
+	}
+	
+	public void delete(long id) {
+		this.em.remove(getById(id));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

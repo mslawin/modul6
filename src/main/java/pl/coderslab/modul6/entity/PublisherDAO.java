@@ -27,4 +27,19 @@ public class PublisherDAO {
 		Query q = this.em.createQuery("SELECT p FROM Publisher p");
 		return q.getResultList();
 	}
+
+	public void delete(long id) {
+		this.em.remove(getById(id));
+	}
+
+	public void update(Publisher publisher) {
+		this.em.merge(publisher);
+	}
+	
+	
+	
+	
+	
+	
+	
 }

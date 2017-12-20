@@ -13,20 +13,21 @@
 <body>
 <p>Add book</p>
 	<form:form method="post" modelAttribute="book">
-		Title<form:input path="title" type="text"/><br />
+		Title<form:input path="title" type="text"/> <form:errors path="title" /> <br />
 		<form:select path="authors" multiple="true">
 			<form:options items="${availableAuthors}"
 			              itemValue="id"
 			              itemLabel="fullName"/>
-		</form:select><br />
-		<form:input path="rating" type="number" /><br />
+		</form:select> <form:errors path="authors" />  <br />
+		<form:input path="rating" type="number" /> <form:errors path="rating" /> <br />
 		
 		<form:select path="publisher">
 			<form:options items="${availablePublishers}"
 			              itemValue="id"
 			              itemLabel="name"/>
-		</form:select><br />
-		<form:textarea path="description" /><br />
+		</form:select> <form:errors path="publisher" />  <br />
+		<form:textarea path="description" /> <form:errors path="description" /> <br />
+		<form:input path="pages" /> <form:errors path="pages" /> <br />
 		<input type='submit' /><br />
 	</form:form>
 ${book}<br/>

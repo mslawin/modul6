@@ -9,14 +9,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Book list</title>
+<title>Publisher list</title>
 </head>
 <body>
-<p>Book list</p>
-	<c:forEach items="${availableBooks}" var="book">
-		<c:out value="${book}"/> 
-		<a href="${pageContext.request.contextPath}/book/${book.id}/del">DEL</a>
-		<a href="${pageContext.request.contextPath}/book/${book.id}/edit">Edit</a><br/>
+<p>Publisher list</p>
+	<c:forEach items="${availablePublishers}" var="publisher">
+		<c:out value="${publisher}"/> 
+		<a href="${pageContext.request.contextPath}/publisher/${publisher.id}/del">DEL</a>
+		<a href="${pageContext.request.contextPath}/publisher/${publisher.id}/edit">Edit</a><br />
 	</c:forEach>
 </body>
 </html>
