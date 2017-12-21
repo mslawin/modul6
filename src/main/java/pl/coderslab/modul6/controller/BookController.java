@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ import pl.coderslab.modul6.validator.BookValidationGroup;
 @Controller
 @RequestMapping("/book")
 public class BookController {
+	final static Logger logger =
+			Logger.getLogger(BookController.class);
+
 	@Autowired
 	BookDAO bd;
 	
@@ -134,6 +138,8 @@ public class BookController {
 	
 	@GetMapping("/list")
 	public String list() {
+		logger.warn("wywolano BookController.list()");
+		logger.error("to jest error");
 		return "book/list";
 	}
 	
